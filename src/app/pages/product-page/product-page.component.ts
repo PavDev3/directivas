@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CustomLabelDirective } from '../../shared/directives/customLabel.directive';
 
 @Component({
   standalone: true,
   selector: 'app-product-page',
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, CustomLabelDirective],
 
   template: `<h4>Product Page</h4>
     <hr />
@@ -18,7 +19,9 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
           <input formControlName="name" type="text" class="form-control" />
         </div>
         <div class="col-auto">
-          <span>Algo de información</span>
+          <span customLabel [errors$]="myForm.get('name')?.errors">
+            Temporal</span
+          >
         </div>
       </div>
       <div class="row">
